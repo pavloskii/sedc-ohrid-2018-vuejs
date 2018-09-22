@@ -1,20 +1,14 @@
 <template>
-    <header>
-        <div>This is our ugly homepage</div>
-        <button class="btn btn-primary" @click="logout">Log out</button>
-        <hr>
-    </header>
+<div class="container p-3">
+    <div class="jumbotron">
+        <h1>This is nicer Homepage</h1>
+    </div>
+    <hr>
+</div>
 </template>
 
 <script>
-export default {
-    methods: {
-        logout(){
-            localStorage.removeItem("token");
-            this.$router.replace('/login');
-        }
-    }
-};
+export default {};
 </script>
 
 <style>

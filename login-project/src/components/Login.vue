@@ -1,5 +1,6 @@
 <template>
-    <form class="col-md-3 center-element">
+<div class="container col-md-3 center-element">
+<form>
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input 
@@ -24,66 +25,77 @@
             class="btn btn-primary" 
             @click.prevent="login">Submit</button>
     </form>
+    <div class="alert alert-warning mt-3" role="alert" v-if="error !== ''">
+      {{ error | filterErrorMessage}}
+    </div>
+</div>
 </template>
 
 <script>
+import axiosAuth from "../axios/auth";
+
 export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   },
   methods: {
     login() {
-      const url =
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCw-lZIhvFfrU2Y2GBbZr2kXO1BmVstvHM";
-      const data = {
-        email: this.email,
-        password: this.password,
-        returnSecureToken: true
-      };
-
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
-      })
-        .then(response => {
-          return response.json();
+      axiosAuth
+        .post("/verifyPassword?key=AIzaSyCw-lZIhvFfrU2Y2GBbZr2kXO1BmVstvHM", {
+          email: this.email,
+          password: this.password,
+          returnSecureToken: true
         })
         .then(data => {
-          //   const now = new Date();
-          //   console.log(now);
-          //   const year = now.getFullYear();
-          //   const month = now.getMonth() + 1;
-          //   const day = now.getDate();
-          //   const h = now.getHours();
-          //   const m = now.getMinutes();
-          //   const s = now.getSeconds();
-          //   if (h < 10) {
-          //       h = "0" + h;
-          //   }
-          //   const expiresInString = `${year}-${month}-${day}T${h+1}:${m}:${s}`;
-          //   console.log(expiresInString);
-
-          //   const expiresIn = new Date(expiresInString);
-          //   console.log(JSON.stringify(expiresIn));
+          console.log(data);
           const now = new Date().getTime();
           const expiresInMiliseconds =
             Number.parseInt(data.expiresIn, 10) * 1000;
           const expiresAtDate = new Date(now + expiresInMiliseconds);
-          console.log(expiresAtDate);
+
           localStorage.setItem("token", data.idToken);
           localStorage.setItem("expiresAt", expiresAtDate);
 
           this.$router.replace("/");
         })
         .catch(error => {
-          console.log(error);
+          console.log(error.response.data.error.message);
+          this.error = error.response.data.error.message;
         });
+      // fetch(url, {
+      //   method: "POST",
+      //   body: JSON.stringify(data),
+      //   headers: {
+      //     "Content-Type": "application/json; charset=utf-8"
+      //   }
+      // })
+      //   .then(response => {
+      //     return response.json();
+      //   })
+      //   .then(data => {
+      //     console.log(data);
+      //     const now = new Date().getTime();
+      //     const expiresInMiliseconds =
+      //       Number.parseInt(data.expiresIn, 10) * 1000;
+      //     const expiresAtDate = new Date(now + expiresInMiliseconds);
+
+      //     localStorage.setItem("token", data.idToken);
+      //     localStorage.setItem("expiresAt", expiresAtDate);
+
+      //     this.$router.replace("/");
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    }
+  },
+  filters: {
+    filterErrorMessage(val){
+      return val.toLowerCase().split("_").join(" ");
     }
   }
 };
