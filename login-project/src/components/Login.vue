@@ -79,6 +79,11 @@ export default {
           localStorage.setItem("token", data.idToken);
           localStorage.setItem("expiresAt", expiresAtDate);
 
+          this.$store.commit("setUser", {
+            email: data.email,
+            token: data.idToken
+          });
+
           this.$router.replace("/");
         })
         .catch(error => {
@@ -97,6 +102,6 @@ export default {
 }
 
 .login {
-  margin-top:60px
+  margin-top: 60px;
 }
 </style>

@@ -1,20 +1,24 @@
 <template>
   <div>
-    <navigation-bar></navigation-bar>
+    <navigation-bar v-if="isAuth"></navigation-bar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NavigationBar from './components/NavigationBar'
+import NavigationBar from "./components/NavigationBar";
 
 export default {
-  components:{
+  components: {
     NavigationBar
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters.isUserAuthenticated;
+    }
   }
-}
+};
 </script>
 
 <style>
-
 </style>
