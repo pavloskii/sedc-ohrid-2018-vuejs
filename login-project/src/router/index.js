@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Login from '../components/Login';
 import Users from '../components/Users';
+import Comments from '../components/Comments';
 
 Vue.use(Router);
 
@@ -32,6 +33,10 @@ export default new Router({
             path: '/login',
             name: 'Login',
             component: Login,
+        },
+        {
+            path: '/comments',
+            component: Comments
         }
     ],
     mode: 'history'

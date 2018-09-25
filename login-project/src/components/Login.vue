@@ -1,5 +1,5 @@
 <template>
-    <form class="col-md-3 center-element">
+    <form class="col-md-3 center-element login">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input 
@@ -94,5 +94,9 @@ export default {
   margin: auto;
   width: 50%;
   padding: 10px;
+}
+
+.login {
+  margin-top:60px
 }
 </style>
