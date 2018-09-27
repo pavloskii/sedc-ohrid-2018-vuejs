@@ -10,14 +10,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App),
-  // created() {
-  //   router.beforeEach((to, from, next) => {
-  //     if (false) {
-  //       next();
-  //     } else {
-  //       next('/login');
-  //     }
-  //   })
-  // }
+  render: h => h(App)
 })

@@ -18,7 +18,7 @@ export default {
       navItems: [
         { name: "Home", path: "/" },
         { name: "Users", path: "/users" },
-        { name: "Comments", path: "/comments" }
+        { name: "Students", path: "/students" }
       ]
     };
   }
