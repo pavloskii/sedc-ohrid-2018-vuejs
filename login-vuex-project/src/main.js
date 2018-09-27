@@ -10,5 +10,17 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  beforeCreate(){
+    const token = localStorage.getItem("token");
+
+    if(token == null){
+      return;
+    }
+
+    this.$store.commit("setUser", {
+      token: token
+    })
+
+  }
 })

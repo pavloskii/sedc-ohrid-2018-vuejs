@@ -8,6 +8,7 @@
             exact>
             {{item.name}}
         </router-link>
+        <button class="btn btn-warning" @click="logout">Logout</button>
     </nav>
 </template>
 
@@ -21,6 +22,11 @@ export default {
         { name: "Students", path: "/students" }
       ]
     };
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch("logout");
+    }
   }
 };
 </script>
