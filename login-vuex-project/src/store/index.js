@@ -12,8 +12,10 @@ export default new Vuex.Store({
     getters: {
         isUserAuthenticated(state) {
             return state.loggedUser !== null;
+        },
+        getStudents(state){
+            return state.students;
         }
-
     },
     mutations: {
         setUser(state, payload) {
