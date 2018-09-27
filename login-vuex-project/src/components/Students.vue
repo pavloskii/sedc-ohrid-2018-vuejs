@@ -5,7 +5,7 @@
         <div class="row">
             <div 
                 v-for="(student, index) in students" 
-                class="card col-md-3" 
+                class="card col-md-3 m-1" 
                 style="width: 18rem;"
                 :key="index"
             >
