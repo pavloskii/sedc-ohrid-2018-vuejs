@@ -2,6 +2,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store';
+import Divider from '@/components/UI/Divider';
+
+//Global components
+Vue.component("divider", Divider);
 
 Vue.config.productionTip = false
 

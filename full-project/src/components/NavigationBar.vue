@@ -1,29 +1,28 @@
 <template>
-    <nav class="nav nav-pills nav-fill">
-        <router-link
-            v-for="item in navItems" :key="item.name"
-            :to="item.path" 
-            class="nav-item nav-link"
-            active-class="active"
-            exact>
-            {{item.name}}
-        </router-link>
-        <button class="btn btn-warning" @click="logout">Logout</button>
-    </nav>
+  <nav class="navbar fixed-top navbar-light bg-light">
+    <router-link to="/" class="navbar-brand"><i class="fa fa-instagram"></i></router-link>
+    <divider />
+    
+    <img src="@/assets/logo-gram.png" height="30" @click="goToTop">
+
+    <divider />
+    <router-link to="/discover-people" class="navbar-brand"><i class="fa fa-user-plus"></i></router-link>
+  </nav>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      navItems: [
-        { name: "Home", path: "/" } 
-      ]
+      navItems: [{ name: "Home", path: "/" }]
     };
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$store.dispatch("logout");
+    },
+    goToTop(){
+      document.body.scrollTop = 0;
     }
   }
 };
