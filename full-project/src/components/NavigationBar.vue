@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       navItems: [
-        { name: "Home", path: "/" }
+        { name: "Home", path: "/" } 
       ]
     };
   },
