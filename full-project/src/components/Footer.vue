@@ -1,33 +1,33 @@
 <template>
     <footer class="navbar fixed-bottom navbar-light bg-light">
-        <button class="btn btn-light flex">
-            <i class="fa fa-home"></i>
-        </button>
-
-        <button class="btn btn-light flex">
-            <i class="fa fa-search"></i>
-        </button>
-
-        <button class="btn btn-light flex">
-            <i class="fa fa-plus-square-o"></i>
-        </button>
-
-        <button class="btn btn-light flex">
-            <i class="fa fa-heart-o"></i>
-        </button>
-
-        <button class="btn btn-light flex">
-            <i class="fa fa-user-o"></i>
-        </button>
+        <router-link
+            :to="r.path" 
+            class="btn btn-light flex" 
+            v-for="r in routes" 
+            :key="r.icon">
+            <i :class="r.icon"></i>
+        </router-link >
     </footer>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      routes: [
+        { path: "/", icon: "fa fa-home" },
+        { path: "/search", icon: "fa fa-search" },
+        { path: "/add-post", icon: "fa fa-plus-square-o" },
+        { path: "/activity", icon: "fa fa-heart-o" },
+        { path: "/profile", icon: "fa fa-user-o" }
+      ]
+    };
+  }
+};
 </script>
 
 <style>
 .flex {
-    flex:1
+  flex: 1;
 }
 </style>
