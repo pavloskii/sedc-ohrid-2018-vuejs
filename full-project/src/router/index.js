@@ -7,6 +7,7 @@ import Search from '../components/Search'
 import AddPost from '../components/AddPost';
 import Activity from '../components/Activity';
 import Profile from '../components/Profile';
+import DiscoverPeople from '../components/DiscoverPeople'
 
 Vue.use(Router);
 
@@ -26,27 +27,37 @@ export default new Router({
         {
             path: '/signup',
             name: 'Signup',
-            component: Signup,
+            component: Signup
         },
         {
             path: '/search',
             name: 'Search',
             component: Search,
+            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
         },
         {
             path: '/add-post',
             name: 'AddPost',
             component: AddPost,
+            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
         },
         {
             path: '/activity',
             name: 'Activity',
             component: Activity,
+            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
         },
         {
             path: '/profile',
             name: 'Profile',
             component: Profile,
+            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+        },
+        {
+            path: '/discover-people',
+            name: 'DiscoverPeople',
+            component: DiscoverPeople,
+            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
         }
     ],
     mode: 'history'

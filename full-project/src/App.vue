@@ -2,7 +2,7 @@
   <div>
     <navigation-bar v-if="isAuth"></navigation-bar>
     <router-view></router-view>
-    <app-footer></app-footer>
+    <app-footer v-if="isAuth"></app-footer>
   </div>
 </template>
 

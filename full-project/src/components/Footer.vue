@@ -3,7 +3,9 @@
         <router-link
             :to="r.path" 
             class="btn btn-light flex" 
-            v-for="r in routes" 
+            v-for="r in routes"
+            active-class="active"
+            exact 
             :key="r.icon">
             <i :class="r.icon"></i>
         </router-link >
