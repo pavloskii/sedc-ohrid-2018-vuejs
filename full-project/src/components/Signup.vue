@@ -27,6 +27,15 @@
                     Sign up
                 </button>
             </form>
+
+            <br>
+            <div 
+              class="alert alert-danger"
+              v-if="errors.length > 0" 
+              role="alert">
+              <p v-for="(error, i) in errors" :key="i">{{error}}</p>
+            </div>
+
             <br>
             <p class="text-center gray-font">By signing up, you agree to our Terms, Data Policy and Cookies Policy.</p>
             </div>
@@ -37,7 +46,7 @@
             <div class="card-body">
             Have an account? <a href @click="toLogin">Log in</a>
         </div>
-</div>
+    </div>
     </div>
 </template>
 
@@ -45,6 +54,7 @@
 export default {
   data() {
     return {
+      errors: [],
       email: "",
       password: ""
     };
@@ -54,6 +64,29 @@ export default {
       this.$router.replace("/login");
     },
     signup() {
+      this.errors = [];
+
+      if (!this.email) {
+        this.errors.push("Email is required!");
+      }
+
+      if (!this.password) {
+        this.errors.push("Password is required!");
+      }
+
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(this.email)) {
+        this.errors.push("Email is not valid!");
+      }
+
+      if (this.password.length < 6) {
+        this.errors.push("Password needs to be atleast 6 characters!");
+      }
+
+      if(this.errors.length > 0){
+        return;
+      }
+
       this.$store.dispatch("signup", {
         email: this.email,
         password: this.password
