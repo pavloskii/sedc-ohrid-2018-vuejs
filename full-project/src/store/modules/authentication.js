@@ -1,4 +1,4 @@
-import { axiosAuth } from '../../axiosConfig';
+import { axiosAuth, apiKey } from '../../axiosConfig';
 import router from '../../router';
 
 export default {
@@ -17,7 +17,7 @@ export default {
     },
     actions: {
         login({ commit }, payload) {
-            axiosAuth.post("", {
+            axiosAuth.post("/verifyPassword?key=" + apiKey, {
                 email: payload.email,
                 password: payload.password,
                 returnSecureToken: payload.returnSecureToken
@@ -41,6 +41,31 @@ export default {
             localStorage.removeItem("token");
             commit("setUser", null);
             router.replace("/login");
+        },
+        signup({ commit }, payload) {
+            axiosAuth.post("/signupNewUser?key=" + apiKey, {
+                email: payload.email,
+                password: payload.password,
+                returnSecureToken: true
+            })
+            .then(response => {
+                const now = new Date().getTime();
+                const expiresInMiliseconds = Number.parseInt(response.expiresIn, 10) * 1000;
+                const expiresAtDate = new Date(now + expiresInMiliseconds);
+
+                localStorage.setItem("token", response.idToken);
+                localStorage.setItem("expiresAt", expiresAtDate);
+
+                commit("setUser", {
+                    email: response.email,
+                    token: response.idToken
+                });
+
+                router.replace("/");
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
     }
 }
