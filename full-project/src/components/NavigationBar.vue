@@ -1,28 +1,21 @@
 <template>
-    <nav class="nav nav-pills nav-fill">
-        <router-link
-            v-for="item in navItems" :key="item.name"
-            :to="item.path" 
-            class="nav-item nav-link"
-            active-class="active"
-            exact>
-            {{item.name}}
-        </router-link>
-        <button class="btn btn-warning" @click="logout">Logout</button>
-    </nav>
+  <nav class="navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand">
+      <i class="fa fa-instagram"></i>
+    </a>
+
+    <img src="@/assets/insta-logo.png" class="logo">
+
+    <a class="navbar-brand">
+      <i class="fa fa-user-plus"></i>
+    </a>
+  </nav>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      navItems: [
-        { name: "Home", path: "/" }
-      ]
-    };
-  },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$store.dispatch("logout");
     }
   }
@@ -30,4 +23,7 @@ export default {
 </script>
 
 <style>
+.logo {
+  height: 33px;
+}
 </style>
