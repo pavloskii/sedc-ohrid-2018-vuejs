@@ -22,16 +22,17 @@ export default {
                 password: payload.password,
                 returnSecureToken: payload.returnSecureToken
             }).then(response => {
+                console.log(response);
                 const now = new Date().getTime();
-                const expiresInMiliseconds = Number.parseInt(response.expiresIn, 10) * 1000;
+                const expiresInMiliseconds = Number.parseInt(response.data.expiresIn, 10) * 1000;
                 const expiresAtDate = new Date(now + expiresInMiliseconds);
 
-                localStorage.setItem("token", response.idToken);
+                localStorage.setItem("token", response.data.idToken);
                 localStorage.setItem("expiresAt", expiresAtDate);
 
                 commit("setUser", {
-                    email: response.email,
-                    token: response.idToken
+                    email: response.data.email,
+                    token: response.data.idToken
                 });
 
                 router.replace("/");

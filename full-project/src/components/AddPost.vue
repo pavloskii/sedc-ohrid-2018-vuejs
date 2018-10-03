@@ -30,7 +30,6 @@
             <h6>Pick an image instead</h6>
             <input type="file" accept="image/*" class="btn btn-light">
         </div>
-
     </div>
 </template>
 
@@ -65,7 +64,10 @@ export default {
         track.stop();
       });
 
-      this.imageFile = dataURItoBlob(canvas.toDataURL());
+      this.imageFile = canvas.toDataURL("image/jpeg", 0.4);
+      // var blob = this.dataURItoBlob(canvas.toDataURL());
+      // this.imageFile = URL.createObjectURL(blob);
+      // console.log(this.imageFile)
     }
   },
   mounted() {
