@@ -4,7 +4,7 @@ import Home from '@/components/Home';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 import Search from '../components/Search'
-import AddPost from '../components/AddPost';
+import AddPost from '../components/Posts/AddPost';
 import Activity from '../components/Activity';
 import Profile from '../components/Profile';
 import DiscoverPeople from '../components/DiscoverPeople'

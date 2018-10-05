@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import NavigationBar from "./components/NavigationBar";
-import Footer from "./components/Footer";
+import NavigationBar from "./components/shared/NavigationBar";
+import Footer from "./components/shared/Footer";
 
 export default {
   components: {
