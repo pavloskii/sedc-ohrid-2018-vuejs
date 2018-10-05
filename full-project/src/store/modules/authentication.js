@@ -8,6 +8,9 @@ export default {
     getters: {
         isUserAuthenticated(state) {
             return state.loggedUser !== null;
+        },
+        getUser(state){
+            return state.loggedUser;
         }
     },
     mutations: {
