@@ -28,7 +28,7 @@
         </div>
         <div v-else>
             <h6>Pick an image instead</h6>
-            <input type="file" accept="image/*" class="btn btn-light">
+            <input type="file" accept="image/*" class="btn btn-light" @change="getBase64">
         </div>
     </div>
 </template>
@@ -51,6 +51,18 @@ export default {
       }
       return new Blob([new Uint8Array(array)], { type: "image/jpeg" });
     },
+    getBase64(event) {
+      console.log(event, event.target.files[0])
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = function() {
+        this.imageFile = reader.result;
+        console.log(reader.result);
+      };
+      reader.onerror = function(error) {
+        console.log("Error: ", error);
+      };
+    },
     takePicture() {
       this.imageTaken = true;
       const canvas = this.$refs["canvas"];
@@ -64,7 +76,8 @@ export default {
         track.stop();
       });
 
-      this.imageFile = canvas.toDataURL("image/jpeg", 0.4);
+      this.imageFile = canvas.toDataURL("image/jpeg", 0.2);
+  
       // var blob = this.dataURItoBlob(canvas.toDataURL());
       // this.imageFile = URL.createObjectURL(blob);
       // console.log(this.imageFile)
