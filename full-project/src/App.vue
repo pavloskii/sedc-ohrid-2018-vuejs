@@ -24,11 +24,13 @@ export default {
 </script>
 
 <style>
+@import './assets/css/animations.css';
+
 body {
   padding-top: 45px;
   padding-bottom: 45px;
   background-color: #fafafa;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .btn-circle {
   width: 30px;
@@ -41,14 +43,18 @@ body {
 }
 
 .btn-circle.btn-xl {
-    width: 70px;
-    height: 70px;
-    padding: 10px 16px;
-    border-radius: 35px;
-    font-size: 24px;
-    line-height: 1.33;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
 }
 .color-black {
-  color:black;
+  color: black;
+}
+.vertical-align {
+  display: flex;
+  align-items: center;
 }
 </style>

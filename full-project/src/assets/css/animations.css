@@ -1,0 +1,6 @@
+.fadeaway-enter-active, .fadeaway-leave-active {
+    transition: opacity .5s;
+}
+.fadeaway-enter, .fadeaway-leave-to {
+opacity: 0;
+}

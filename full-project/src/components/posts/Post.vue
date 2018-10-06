@@ -5,13 +5,13 @@
             <button class="float-left img-circular" :style="'background-image: url('+post.image+')'"/>
             <div class="float-right pl-2"><strong>{{post.email | emailToUsername}}</strong></div>
           </div>
-          <i class="fa fa-ellipsis-h" />
+          <i class="fa fa-ellipsis-h" @click="openMoreModal"/>
         </div>
-        <img class="card-img-top" :src="post.image">
+        <img class="card-img-top" :src="post.image" @dblclick="picDoubleClick">
         
         <div class="card-body">
             <div>
-                <i class="fa fa-lg fa-heart-o"></i>
+                <like :likes="post.likes" :postId="post.postId" ref="like"></like>
                 <i class="fa fa-lg fa-comment-o"></i>
             </div>
             <p>{{likes}} likes</p>
@@ -27,16 +27,28 @@
 
 <script>
 import moment from "moment";
+import Like from "./Like";
 
 export default {
   props: ["post"],
+  methods: {
+    openMoreModal() {
+      this.$emit("openMoreModal", this.post.postId);
+    },
+    picDoubleClick() {
+      this.$refs["like"].$el.click();
+    }
+  },
   computed: {
     likes() {
       if (this.post.likes === undefined || this.post.likes === null) {
         return 0;
       }
-      return this.post.likes.length;
+      return Object.keys(this.post.likes).length;
     }
+  },
+  components: {
+    Like
   },
   filters: {
     fromNow(val) {
@@ -66,7 +78,7 @@ export default {
 }
 
 .vertical-align {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -3,10 +3,15 @@ import App from './App'
 import router from './router'
 import store from './store';
 import Post from './components/posts/post';
+import Modal from './components/UI/Modal';
+import Backdrop from './components/UI/Backdrop';
 import emailToUsername from './filters/emailToUsername'
 
 //Global components
 Vue.component('post', Post);
+Vue.component('modal', Modal);
+Vue.component('backdrop', Backdrop);
+
 //Global filters
 Vue.filter('emailToUsername', emailToUsername);
 

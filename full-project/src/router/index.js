@@ -8,7 +8,8 @@ import Search from '../components/Search'
 import AddPost from '../components/Posts/AddPost';
 import Activity from '../components/Activity';
 import Profile from '../components/Profile';
-import DiscoverPeople from '../components/DiscoverPeople'
+import DiscoverPeople from '../components/DiscoverPeople';
+import SinglePostView from '../components/posts/SinglePostView';
 
 Vue.use(Router);
 
@@ -58,6 +59,12 @@ export default new Router({
             path: '/discover-people',
             name: 'DiscoverPeople',
             component: DiscoverPeople,
+            beforeEnter: NavGuard
+        },
+        {
+            path: '/post/:id',
+            name: 'SinglePostView',
+            component: SinglePostView,
             beforeEnter: NavGuard
         }
     ],
