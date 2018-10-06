@@ -37,7 +37,6 @@ export default {
   color: black;
 }
 .custom-border {
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>

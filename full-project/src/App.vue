@@ -28,6 +28,7 @@ body {
   padding-top: 45px;
   padding-bottom: 45px;
   background-color: #fafafa;
+  font-family: 'Open Sans', sans-serif;
 }
 .btn-circle {
   width: 30px;
@@ -46,5 +47,8 @@ body {
     border-radius: 35px;
     font-size: 24px;
     line-height: 1.33;
+}
+.color-black {
+  color:black;
 }
 </style>

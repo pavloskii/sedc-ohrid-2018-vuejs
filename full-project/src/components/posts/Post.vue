@@ -1,6 +1,12 @@
 <template>
     <div class="card">
-        <i class="fa fa-ellipsis-h" />
+        <div class="navbar">
+          <div class="vertical-align">
+            <button class="float-left img-circular" :style="'background-image: url('+post.image+')'"/>
+            <div class="float-right pl-2"><strong>{{post.email | emailToUsername}}</strong></div>
+          </div>
+          <i class="fa fa-ellipsis-h" />
+        </div>
         <img class="card-img-top" :src="post.image">
         
         <div class="card-body">
@@ -10,7 +16,7 @@
             </div>
             <p>{{likes}} likes</p>
             <p class="card-text">
-                <strong>{{post.email}}</strong>
+                <strong>{{post.email | emailToUsername}}</strong>
                 {{post.description}} 
             </p>
             <small class="from-now">{{post.date | fromNow}}</small>
@@ -34,7 +40,11 @@ export default {
   },
   filters: {
     fromNow(val) {
-        return  moment(val).fromNow().toUpperCase();
+      return moment
+        .utc(val)
+        .local()
+        .fromNow()
+        .toUpperCase();
     }
   }
 };
@@ -44,5 +54,19 @@ export default {
 .from-now {
   color: #a9a9a9;
   font-size: 0.7rem;
+}
+.img-circular {
+  width: 36px;
+  height: 36px;
+  background-size: cover;
+  display: block;
+  border-radius: 18px;
+  -webkit-border-radius: 36px;
+  -moz-border-radius: 36px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
 }
 </style>
