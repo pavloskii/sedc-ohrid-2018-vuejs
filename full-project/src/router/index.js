@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import NavGuard from './nav-guard';
 import Home from '@/components/Home';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
@@ -17,7 +18,7 @@ export default new Router({
             path: '/',
             name: 'Home',
             component: Home,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         },
         {
             path: '/login',
@@ -33,42 +34,32 @@ export default new Router({
             path: '/search',
             name: 'Search',
             component: Search,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         },
         {
             path: '/add-post',
             name: 'AddPost',
             component: AddPost,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         },
         {
             path: '/activity',
             name: 'Activity',
             component: Activity,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         },
         {
             path: '/profile',
             name: 'Profile',
             component: Profile,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         },
         {
             path: '/discover-people',
             name: 'DiscoverPeople',
             component: DiscoverPeople,
-            beforeEnter: (to, from, next) => beforeEnteringRoute(to, from, next)
+            beforeEnter: NavGuard
         }
     ],
     mode: 'history'
 })
-
-function beforeEnteringRoute(to, from, next) {
-    const token = localStorage.getItem("token");
-
-    if (token != null) {
-        next();
-    } else {
-        next('/login');
-    }
-}

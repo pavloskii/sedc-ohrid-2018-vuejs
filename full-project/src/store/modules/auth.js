@@ -72,6 +72,7 @@ export default {
                 })
         },
         autoLogin({ commit }, payload) {
+            return;
             // axiosToken.post('token?key=' + apiKey, {
             //     grant_type: "refresh_token",
             //     refresh_token: payload.refreshToken

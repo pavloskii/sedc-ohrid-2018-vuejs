@@ -15,18 +15,6 @@ new Vue({
   store,
   render: h => h(App),
   beforeCreate() {
-    const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    if (token == null || refreshToken == null) {
-      return;
-    }
-
-    // this.$store.dispatch("autoLogin", {
-    //   refreshToken
-    // });
-    this.$store.commit("setUser", {
-      token: token
-    })
+    this.$store.dispatch("autoLogin");
   }
 })

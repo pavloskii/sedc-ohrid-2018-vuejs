@@ -2,23 +2,24 @@
 <div>
     <div v-show="!imageTaken">
         <video autoplay ref="video" class="video"></video>
-        <button 
-            class="btn btn-dark btn-block" 
-            @click="takePicture">
-            <i class="fa fa-camera fa-lg"></i>
-            Capture
-        </button>
+        <div class="navbar navbar-light fixed-bottom video-buttons">
+          <button class="btn btn-circle btn-dark btn-lg" @click="toggleFacingMode">
+              <i class="fa fa-refresh"></i>
+          </button>
+          <button class="btn btn-circle btn-xl" @click="takePicture">
+              <i class="fa fa-camera fa-lg"></i>
+          </button>
+
+          <button class="btn btn-circle btn-dark btn-lg">
+              <i class="fa fa-image"></i>
+          </button>
+        </div>
     </div>
 
     <div v-show="imageTaken">
-        <canvas 
-            width="320px" 
-            height="240px" 
-            ref="canvas" 
-            class="canvas"></canvas>
+        <canvas ref="canvas" class="canvas"></canvas>
         <button class="btn btn-dark btn-block" @click="recapture">
-            <i class="fa fa-camera fa-lg"></i>
-            Recapture
+            <i class="fa fa-camera fa-lg"></i> Recapture
         </button>
 
         <br>
@@ -50,6 +51,7 @@ export default {
     return {
       imageTaken: false,
       hasCameraAccess: true,
+      selfieMode: true,
       post: {
         imageUrl: "",
         description: ""
@@ -61,18 +63,15 @@ export default {
       this.imageTaken = true;
       const canvas = this.$refs["canvas"];
       const videoPlayer = this.$refs["video"];
-      canvas.width = videoPlayer.videoWidth
-      canvas.height = videoPlayer.videoHeight
+      canvas.width = videoPlayer.videoWidth;
+      canvas.height = videoPlayer.videoHeight;
 
       canvas
         .getContext("2d")
         .drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
 
       this.post.imageUrl = canvas.toDataURL("image/jpeg", 0.3);
-
-      videoPlayer.srcObject.getVideoTracks().forEach(track => {
-        track.stop();
-      });
+      this.stopCamera();
     },
     recapture() {
       this.post.imageUrl = "";
@@ -80,8 +79,10 @@ export default {
       this.accessUsersCamera();
     },
     accessUsersCamera() {
+      const mode = this.selfieMode ? "user" : "environment";
+
       navigator.mediaDevices
-        .getUserMedia({ video: true })
+        .getUserMedia({ video: { facingMode: mode } })
         .then(stream => {
           this.$refs["video"].srcObject = stream;
         })
@@ -89,8 +90,18 @@ export default {
           this.hasCameraAccess = false;
         });
     },
+    stopCamera() {
+      this.$refs["video"].srcObject.getVideoTracks().forEach(track => {
+        track.stop();
+      });
+    },
+    toggleFacingMode() {
+      this.selfieMode = !this.selfieMode;
+      this.stopCamera();
+      this.accessUsersCamera();
+    },
     addPost() {
-      const email = this.$store.state.authentication.loggedUser.email;
+      const email = this.$store.state.auth.loggedUser.email;
       this.$store.dispatch("addPost", {
         imageUrl: this.post.imageUrl,
         description: this.post.description,
@@ -102,9 +113,7 @@ export default {
     this.accessUsersCamera();
   },
   beforeDestroy() {
-    this.$refs["video"].srcObject.getVideoTracks().forEach(track => {
-      track.stop();
-    });
+    this.stopCamera();
   }
 };
 </script>
@@ -114,5 +123,10 @@ export default {
 .canvas {
   max-width: 100%;
   max-height: 100%;
+}
+
+.video-buttons {
+  padding: 0 10px 0 10px;
+  margin-bottom: 50px;
 }
 </style>
