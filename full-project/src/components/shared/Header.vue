@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar fixed-top navbar-light bg-light">
+  <nav class="navbar fixed-top custom-navbar">
     <a class="navbar-brand">
-      <i class="fa fa-instagram"></i>
+      <i class="fa fa-instagram fa-lg"></i>
     </a>
 
     <img src="@/assets/insta-logo.png" class="logo">
@@ -24,6 +24,12 @@ export default {
 
 <style>
 .logo {
-  height: 33px;
+  height: 40px;
+}
+.custom-navbar {
+  max-height: 45px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
 }
 </style>

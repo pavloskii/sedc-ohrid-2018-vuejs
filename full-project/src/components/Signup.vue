@@ -2,9 +2,10 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <img src="@/assets/insta-logo.png" 
-                    class="signup-logo">
-                    <p class="text-center gray-font">Sign up to see photos and videos from your friends.</p>
+                <img src="@/assets/insta-logo.png" class="signup-logo">
+                <p class="text-center gray-font">
+                  Sign up to see photos and videos from your friends.
+                </p>
             <form>
                 <div class="form-group">
                     <input 
@@ -61,7 +62,7 @@ export default {
   },
   methods: {
     toLogin() {
-      this.$router.replace("/login");
+      this.$router.push("/login");
     },
     signup() {
       this.errors = [];
@@ -105,5 +106,9 @@ export default {
 }
 .gray-font {
   color: #999;
+}
+
+input.form-control {
+  background-color: #FAFAFA;
 }
 </style>

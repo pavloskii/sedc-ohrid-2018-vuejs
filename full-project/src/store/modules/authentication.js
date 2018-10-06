@@ -22,10 +22,8 @@ export default {
                 password: payload.password,
                 returnSecureToken: payload.returnSecureToken
             }).then(response => {
-                console.log(response);
-                const now = new Date().getTime();
-                const expiresInMiliseconds = Number.parseInt(response.data.expiresIn, 10) * 1000;
-                const expiresAtDate = new Date(now + expiresInMiliseconds);
+                const expiresInMs = Number.parseInt(response.data.expiresIn, 10) * 1000;
+                const expiresAtDate = new Date(new Date().getTime() + expiresInMs);
 
                 localStorage.setItem("token", response.data.idToken);
                 localStorage.setItem("expiresAt", expiresAtDate);
@@ -39,7 +37,7 @@ export default {
                 });
 
                 router.replace("/");
-            }).catch(error => console.log(error))
+            }).catch(error => commit('setError', error.response.data.error.message))
         },
         logout({ commit }) {
             localStorage.removeItem("token");
@@ -53,10 +51,8 @@ export default {
                 returnSecureToken: true
             })
                 .then(response => {
-                    console.log(response);
-                    const now = new Date().getTime();
-                    const expiresInMiliseconds = Number.parseInt(response.data.expiresIn, 10) * 1000;
-                    const expiresAtDate = new Date(now + expiresInMiliseconds);
+                    const expiresInMs = Number.parseInt(response.data.expiresIn, 10) * 1000;
+                    const expiresAtDate = new Date(new Date().getTime() + expiresInMs);
 
                     localStorage.setItem("token", response.data.idToken);
                     localStorage.setItem("refreshToken", response.data.refreshToken);
@@ -72,7 +68,7 @@ export default {
                     router.replace("/");
                 })
                 .catch(error => {
-                    console.log(error.data);
+                    commit('setError', error.response.data.error.message);
                 })
         },
         autoLogin({ commit }, payload) {

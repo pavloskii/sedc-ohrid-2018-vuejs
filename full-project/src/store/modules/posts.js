@@ -1,12 +1,13 @@
 import { axiosDatabase } from "../../axiosConfig";
 import router from "../../router";
+import moment from 'moment';
 
 export default {
-    state:{
+    state: {
         posts: []
     },
-    mutations:{
-        setPosts(state, payload){
+    mutations: {
+        setPosts(state, payload) {
             state.posts = payload;
         }
     },
@@ -15,7 +16,8 @@ export default {
             axiosDatabase.post('/posts.json', {
                 image: payload.imageUrl,
                 description: payload.description,
-                email: payload.email
+                email: payload.email,
+                date: moment.utc().format('YYYY-MM-DD HH:mm:ss')
             })
                 .then(response => {
                     router.replace('/');
@@ -24,9 +26,16 @@ export default {
                     console.log(error)
                 })
         },
-        getPosts({commit}) {
+        getPosts({ commit }) {
             axiosDatabase.get('/posts.json').then(response => {
-                commit('setPosts', response.data);
+                const posts = Object.keys(response.data).map(key => {
+                    return {
+                        postId: key,
+                        ...response.data[key]
+                    }
+                }).reverse();
+                
+                commit('setPosts', posts);
             })
         }
     }

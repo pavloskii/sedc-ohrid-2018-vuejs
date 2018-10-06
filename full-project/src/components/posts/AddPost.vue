@@ -3,9 +3,9 @@
     <div v-show="!imageTaken">
         <video autoplay ref="video" class="video"></video>
         <button 
-            class="btn btn-light btn-block" 
+            class="btn btn-dark btn-block" 
             @click="takePicture">
-            <i class="fa fa-camera"></i>
+            <i class="fa fa-camera fa-lg"></i>
             Capture
         </button>
     </div>
@@ -16,8 +16,8 @@
             height="240px" 
             ref="canvas" 
             class="canvas"></canvas>
-        <button class="btn btn-light btn-block" @click="recapture">
-            <i class="fa fa-camera"></i>
+        <button class="btn btn-dark btn-block" @click="recapture">
+            <i class="fa fa-camera fa-lg"></i>
             Recapture
         </button>
 
@@ -31,7 +31,7 @@
                     v-model="post.description">
                     <br>
                 <button 
-                    class="btn btn-light btn-block" 
+                    class="btn btn-outline-dark btn-block" 
                     @click.prevent="addPost">
                     Post
                 </button>
@@ -61,13 +61,15 @@ export default {
       this.imageTaken = true;
       const canvas = this.$refs["canvas"];
       const videoPlayer = this.$refs["video"];
+      canvas.width = videoPlayer.videoWidth
+      canvas.height = videoPlayer.videoHeight
 
       canvas
         .getContext("2d")
         .drawImage(videoPlayer, 0, 0, canvas.width, canvas.height);
 
       this.post.imageUrl = canvas.toDataURL("image/jpeg", 0.3);
-      
+
       videoPlayer.srcObject.getVideoTracks().forEach(track => {
         track.stop();
       });
@@ -89,10 +91,10 @@ export default {
     },
     addPost() {
       const email = this.$store.state.authentication.loggedUser.email;
-      this.$store.dispatch('addPost', {
-          imageUrl: this.post.imageUrl,
-          description: this.post.description,
-          email
+      this.$store.dispatch("addPost", {
+        imageUrl: this.post.imageUrl,
+        description: this.post.description,
+        email
       });
     }
   },
@@ -110,7 +112,7 @@ export default {
 <style>
 .video,
 .canvas {
-  width: 512px;
   max-width: 100%;
+  max-height: 100%;
 }
 </style>

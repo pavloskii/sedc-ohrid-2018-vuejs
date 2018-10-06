@@ -1,18 +1,18 @@
 <template>
   <div>
-    <navigation-bar v-if="isAuth"></navigation-bar>
+    <app-header v-if="isAuth"></app-header>
     <router-view></router-view>
     <app-footer v-if="isAuth"></app-footer>
   </div>
 </template>
 
 <script>
-import NavigationBar from "./components/shared/NavigationBar";
+import Header from "./components/shared/Header";
 import Footer from "./components/shared/Footer";
 
 export default {
   components: {
-    NavigationBar,
+    "app-header":Header,
     "app-footer": Footer
   },
   computed: {
@@ -25,7 +25,8 @@ export default {
 
 <style>
 body {
-  padding-top: 55px;
-  padding-bottom: 55px;
+  padding-top: 45px;
+  padding-bottom: 45px;
+  background-color: #FAFAFA;
 }
 </style>

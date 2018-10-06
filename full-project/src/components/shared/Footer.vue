@@ -1,5 +1,5 @@
 <template>
-    <footer class="navbar fixed-bottom navbar-light bg-light">
+    <footer class="navbar navbar-light bg-light fixed-bottom" style="padding:0">
         <router-link
             :to="r.path" 
             class="btn btn-light flex" 
@@ -17,11 +17,11 @@ export default {
   data() {
     return {
       routes: [
-        { path: "/", icon: "fa fa-home" },
-        { path: "/search", icon: "fa fa-search" },
-        { path: "/add-post", icon: "fa fa-plus-square-o" },
-        { path: "/activity", icon: "fa fa-heart-o" },
-        { path: "/profile", icon: "fa fa-user-o" }
+        { path: "/", icon: "fa fa-lg fa-home" },
+        { path: "/search", icon: "fa fa-lg fa-search" },
+        { path: "/add-post", icon: "fa fa-lg fa-plus-square-o" },
+        { path: "/activity", icon: "fa fa-lg fa-heart-o" },
+        { path: "/profile", icon: "fa fa-lg fa-user-o" }
       ]
     };
   }
@@ -31,5 +31,9 @@ export default {
 <style>
 .flex {
   flex: 1;
+}
+.nav-buttons{
+  background-color: white;
+  color:black;
 }
 </style>

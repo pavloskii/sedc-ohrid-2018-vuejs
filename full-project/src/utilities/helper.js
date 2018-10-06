@@ -1,3 +1,3 @@
-function validateForm(){
+function validateForm(email, password){
     
 }
