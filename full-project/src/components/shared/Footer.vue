@@ -1,5 +1,5 @@
 <template>
-    <footer class="navbar navbar-light bg-light fixed-bottom" style="padding:0">
+    <footer class="navbar navbar-light bg-light fixed-bottom custom-border" style="padding:0">
         <router-link
             :to="r.path" 
             class="btn btn-light flex" 
@@ -32,8 +32,12 @@ export default {
 .flex {
   flex: 1;
 }
-.nav-buttons{
+.nav-buttons {
   background-color: white;
-  color:black;
+  color: black;
+}
+.custom-border {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
 }
 </style>
