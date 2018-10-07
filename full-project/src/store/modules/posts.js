@@ -27,7 +27,8 @@ export default {
                     image: payload.imageUrl,
                     description: payload.description,
                     email: payload.email,
-                    date: moment.utc().format('YYYY-MM-DD HH:mm:ss')
+                    date: moment.utc().format('YYYY-MM-DD HH:mm:ss'),
+                    filters: payload.filters
                 })
                 .then(response => {
                     router.replace('/');

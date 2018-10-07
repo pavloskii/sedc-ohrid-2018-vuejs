@@ -17,7 +17,9 @@
     </div>
 
     <div v-show="imageTaken">
-        <canvas ref="canvas" class="canvas"></canvas>
+        <canvas ref="canvas" class="canvas d-none"></canvas>
+        <img :src="post.imageUrl" class="canvas" :style="{'-webkit-filter': appliedFilters}">
+        <filters :image="post.imageUrl" @activeFilter="applyFilter($event)"></filters>
         <button class="btn btn-dark btn-block" @click="recapture">
             <i class="fa fa-camera fa-lg"></i> Recapture
         </button>
@@ -46,15 +48,19 @@
 </template>
 
 <script>
+import Filters from "./Filters";
+
 export default {
   data() {
     return {
       imageTaken: false,
       hasCameraAccess: true,
       selfieMode: true,
+      appliedFilters: "",
       post: {
         imageUrl: "",
-        description: ""
+        description: "",
+        filters: []
       }
     };
   },
@@ -75,6 +81,8 @@ export default {
     },
     recapture() {
       this.post.imageUrl = "";
+      this.post.filters = [];
+      this.appliedFilters = "";
       this.imageTaken = false;
       this.accessUsersCamera();
     },
@@ -102,11 +110,35 @@ export default {
     },
     addPost() {
       const email = this.$store.state.auth.loggedUser.email;
+      const filters = {};
+      this.post.filters.forEach(f => {
+        if (f.chosen) {
+          filters[f.name] = f.percent;
+        }
+      });
+
       this.$store.dispatch("addPost", {
         imageUrl: this.post.imageUrl,
         description: this.post.description,
-        email
+        email,
+        filters
       });
+    },
+    applyFilter(filter) {
+      const isAddedBefore = this.post.filters.find(f => f.name == filter.name);
+
+      if (isAddedBefore) {
+        const filterIndex = this.post.filters.indexOf(isAddedBefore);
+        this.post.filters[filterIndex] = filter;
+      } else {
+        this.post.filters.push(filter);
+      }
+      let filters = "";
+      this.post.filters.forEach(filter => {
+        filters += `${filter.name}(${filter.percent}%)`;
+      });
+
+      this.appliedFilters = filters;
     }
   },
   mounted() {
@@ -114,6 +146,9 @@ export default {
   },
   beforeDestroy() {
     this.stopCamera();
+  },
+  components: {
+    Filters
   }
 };
 </script>
@@ -124,10 +159,8 @@ export default {
   max-width: 100%;
   max-height: 100%;
 }
-
 .video-buttons {
   padding: 0 15px 0 15px;
   margin-bottom: 50px;
 }
-
 </style>
