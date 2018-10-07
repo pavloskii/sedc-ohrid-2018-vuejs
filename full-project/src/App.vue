@@ -32,6 +32,7 @@ body {
   background-color: #fafafa;
   font-family: "Open Sans", sans-serif;
 }
+
 .btn-circle {
   width: 30px;
   height: 30px;

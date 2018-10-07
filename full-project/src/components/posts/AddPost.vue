@@ -126,7 +126,8 @@ export default {
 }
 
 .video-buttons {
-  padding: 0 10px 0 10px;
+  padding: 0 15px 0 15px;
   margin-bottom: 50px;
 }
+
 </style>

@@ -4,3 +4,24 @@
 .fadeaway-enter, .fadeaway-leave-to {
 opacity: 0;
 }
+
+@keyframes arrow {
+    from {
+      opacity: 0;
+      transform: translateY(-50px) scale(.8);
+    }
+  
+    70% {
+      opacity: 1;
+    }
+  
+    80% {
+      opacity: 0;
+      transform: translateY(0)
+    }
+  
+    to {
+      opacity: 0;
+      transform: translateY(0)
+    }
+  }

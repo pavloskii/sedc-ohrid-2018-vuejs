@@ -6,11 +6,13 @@ import Post from './components/posts/post';
 import Modal from './components/UI/Modal';
 import Backdrop from './components/UI/Backdrop';
 import emailToUsername from './filters/emailToUsername'
+import Spinner from './components/UI/Spinner'
 
 //Global components
 Vue.component('post', Post);
 Vue.component('modal', Modal);
 Vue.component('backdrop', Backdrop);
+Vue.component('spinner', Spinner);
 
 //Global filters
 Vue.filter('emailToUsername', emailToUsername);

@@ -7,8 +7,15 @@
           </div>
           <i class="fa fa-ellipsis-h" @click="openMoreModal"/>
         </div>
-        <img class="card-img-top" :src="post.image" @dblclick="picDoubleClick">
-        
+
+        <animated-heart 
+          v-if="showAnimatedHeart" 
+          @removeHeart="showAnimatedHeart = false"></animated-heart>
+        <filtered-image 
+          :image="post.image" 
+          :filters="post.filters" 
+          @imgDblClicked="picDoubleClick"></filtered-image>
+
         <div class="card-body">
             <div>
                 <like :likes="post.likes" :postId="post.postId" ref="like"></like>
@@ -28,14 +35,22 @@
 <script>
 import moment from "moment";
 import Like from "./Like";
+import AnimatedHeart from "./AnimatedHeart";
+import FilteredImage from './FilteredImage'
 
 export default {
   props: ["post"],
+  data() {
+    return {
+      showAnimatedHeart: false
+    };
+  },
   methods: {
     openMoreModal() {
       this.$emit("openMoreModal", this.post.postId);
     },
     picDoubleClick() {
+      this.showAnimatedHeart = true;
       this.$refs["like"].$el.click();
     }
   },
@@ -48,7 +63,9 @@ export default {
     }
   },
   components: {
-    Like
+    Like,
+    AnimatedHeart,
+    FilteredImage
   },
   filters: {
     fromNow(val) {

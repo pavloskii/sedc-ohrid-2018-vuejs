@@ -7,7 +7,7 @@ export default {
         posts: [],
         post: {
             date: "",
-            description: " ",
+            description: "",
             email: "",
             image: ""
         }
@@ -50,11 +50,16 @@ export default {
                 }).catch(error => console.log(error))
         },
         getPostById({ commit }, payload) {
+            commit('setLoading', true);
             axiosDatabase
                 .get(`/posts/${payload.id}.json`)
                 .then(response => {
                     commit('setPost', response.data);
-                }).catch(error => console.log(error))
+                    commit('setLoading', false);
+                }).catch(error => {
+                    commit('setLoading', false);
+                    console.log(error)
+                })
         },
         likePost({ commit, state }, payload) {
             const postIndex = state.posts.findIndex(post => post.postId == payload.postId);
