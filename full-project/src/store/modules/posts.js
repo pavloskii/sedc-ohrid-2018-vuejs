@@ -38,6 +38,8 @@ export default {
                 })
         },
         getPosts({ commit }) {
+            commit('setLoading', true);
+
             axiosDatabase
                 .get('/posts.json').then(response => {
                     const posts = Object.keys(response.data).map(key => {
@@ -48,7 +50,11 @@ export default {
                     }).reverse();
 
                     commit('setPosts', posts);
-                }).catch(error => console.log(error))
+                    commit('setLoading', false);
+                }).catch(error => {
+                    commit('setLoading', false);
+                    console.log(error)
+                })
         },
         getPostById({ commit }, payload) {
             commit('setLoading', true);

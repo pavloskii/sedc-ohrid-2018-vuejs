@@ -1,5 +1,11 @@
 <template>
-    <div>
+    <centered-container v-if="loading">
+      <spinner></spinner>
+    </centered-container>
+
+    <div v-else>
+        <stories-horizontal-list></stories-horizontal-list>
+
         <post 
             v-for="post in posts" 
             :key="post.postId" 
@@ -18,6 +24,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import StoriesHorizontalList from "../stories/StoriesHorizontalList";
+
 export default {
   data() {
     return {
@@ -35,9 +44,13 @@ export default {
     this.$store.dispatch("getPosts");
   },
   computed: {
-    posts() {
-      return this.$store.state.posts.posts;
-    }
+    ...mapState({
+      posts: state => state.posts.posts,
+      loading: state => state.shared.loading
+    })
+  },
+  components: {
+    StoriesHorizontalList
   }
 };
 </script>

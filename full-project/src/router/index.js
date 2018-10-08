@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import NavGuard from './nav-guard';
-import Home from '@/components/Home';
-import Login from '../components/Login';
-import Signup from '../components/Signup';
-import Search from '../components/Search'
+import Home from '@/components/views/Home';
+import Login from '../components/views/Login';
+import Signup from '../components/views/Signup';
+import Search from '../components/views/Search'
 import AddPost from '../components/Posts/AddPost';
-import Activity from '../components/Activity';
-import Profile from '../components/Profile';
-import DiscoverPeople from '../components/DiscoverPeople';
+import Activity from '../components/views/Activity';
+import Profile from '../components/views/Profile';
+import DiscoverPeople from '../components/views/DiscoverPeople';
 import SinglePostView from '../components/posts/SinglePostView';
 
 Vue.use(Router);

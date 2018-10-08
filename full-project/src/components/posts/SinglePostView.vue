@@ -1,9 +1,10 @@
 <template>
     <div>
 
-      <div v-if="loading" 
-        class="d-flex justify-content-center align-items-center center-v-h">
-        <spinner></spinner></div>
+      <centered-container v-if="loading">
+        <spinner></spinner>
+      </centered-container>
+      
       <div v-else>
         <post :post="post" @openMoreModal="showModal = true"/>
 

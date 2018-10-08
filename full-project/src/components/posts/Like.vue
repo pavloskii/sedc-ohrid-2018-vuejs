@@ -33,7 +33,7 @@ export default {
   created() {
     if (this.likes) {
       const userId = this.$store.state.auth.loggedUser.userId;
-      if (Object.keys(this.likes).filter(key => (key = userId))) {
+      if (Object.keys(this.likes).filter(key => key == userId).length >= 1) {
         this.isLiked = true;
       }
     }

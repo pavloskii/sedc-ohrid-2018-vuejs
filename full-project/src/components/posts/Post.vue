@@ -36,13 +36,14 @@
 import moment from "moment";
 import Like from "./Like";
 import AnimatedHeart from "./AnimatedHeart";
-import FilteredImage from './FilteredImage'
+import FilteredImage from "./FilteredImage";
 
 export default {
   props: ["post"],
   data() {
     return {
-      showAnimatedHeart: false
+      showAnimatedHeart: false,
+      likes: 0
     };
   },
   methods: {
@@ -54,14 +55,26 @@ export default {
       this.$refs["like"].$el.click();
     }
   },
-  computed: {
-    likes() {
-      if (this.post.likes === undefined || this.post.likes === null) {
-        return 0;
-      }
-      return Object.keys(this.post.likes).length;
+  created() {
+    if (this.post.likes === undefined || this.post.likes === null) {
+      this.likes = 0;
     }
+    this.likes = Object.keys(this.post.likes).length;
   },
+  updated() {
+    if (this.post.likes === undefined || this.post.likes === null) {
+      this.likes = 0;
+    }
+    this.likes = Object.keys(this.post.likes).length;
+  },
+  // computed: {
+  //   likes() {
+  //     if (this.post.likes === undefined || this.post.likes === null) {
+  //       return 0;
+  //     }
+  //     return Object.keys(this.post.likes).length;
+  //   }
+  // },
   components: {
     Like,
     AnimatedHeart,

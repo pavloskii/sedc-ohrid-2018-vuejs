@@ -41,9 +41,9 @@ export default {
   flex-wrap: nowrap;
   overflow-x: auto;
 }
-.app-card {
+/* .app-card {
   flex: 0 0 auto;
-}
+} */
 .filter-image {
   margin: 10px;
   width: 75px;

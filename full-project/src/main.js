@@ -6,16 +6,20 @@ import Post from './components/posts/post';
 import Modal from './components/UI/Modal';
 import Backdrop from './components/UI/Backdrop';
 import emailToUsername from './filters/emailToUsername'
-import Spinner from './components/UI/Spinner'
+import Spinner from './components/UI/Spinner';
+import CenteredContainer from './components/UI/CenteredContainer';
+
+//Global filters
+Vue.filter('emailToUsername', emailToUsername);
 
 //Global components
 Vue.component('post', Post);
 Vue.component('modal', Modal);
 Vue.component('backdrop', Backdrop);
 Vue.component('spinner', Spinner);
+Vue.component('centered-container', CenteredContainer);
 
-//Global filters
-Vue.filter('emailToUsername', emailToUsername);
+
 
 Vue.config.productionTip = false
 
