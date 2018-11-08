@@ -1,6 +1,6 @@
 # Full vuejs project - Instagram clone
 
-> Instagram clone application made for the purposes of my Vuejs lectures on Seavus Education and Development Center.
+> Instagram clone application made for the purposes of my Vuejs lectures in Seavus Education and Development Center.
 
 ## Build Setup
 
