@@ -1,6 +1,6 @@
-# login-project
+# Full vuejs project - Instagram clone
 
-> A Vue.js project
+> Instagram clone application made for the purposes of my Vuejs lectures on Seavus Education and Development Center.
 
 ## Build Setup
 
